@@ -1,0 +1,7 @@
+dataset: "agqa_balanced"
+balanced_path: "data/dataset/agqa_balanced/train_balanced.txt"
+scenegraph_path: "data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl"
+output_dir: "data/generated/agqa_balanced/1m"
+seed: 42
+max_k: 40
+shard_size: 10000
