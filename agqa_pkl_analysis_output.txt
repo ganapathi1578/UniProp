@@ -1,0 +1,137 @@
+================================================================================
+FILE 3: AGQA_train_stsgs.pkl
+================================================================================
+File size: 443,514,858 bytes (423.0 MB)
+
+Loading pickle file...
+Top-level type: dict
+Number of top-level keys: 7787
+Sample top-level keys (first 10): ['46GP8', 'N11GT', 'KRF68', 'MJO7C', 'S6MPZ', '7HVU8', 'MCQO5', 'VPIYF', 'JSUF4', '8WJIR']
+Key type: str
+
+--- First entry ---
+Key: '46GP8'
+Value type: dict
+Value keys: ['000031', '000091', '000152', '000212', '000272', '000309', '000354', '000398', '000442', '000487', 'c092/1', 'c066/1', 'o17/000031', 'o17/000091', 'o17/000152', 'o17/000212', 'o17/000272', 'o36/000309', 'o36/000354', 'o36/000398', 'o36/000442', 'o36/000487', 'r1/000031', 'r1/000091', 'r2/000152', 'r1/000212', 'r1/000309', 'r1/000354', 'r1/000398', 'r1/000442', 'r2/000487', 'r1/000487', 'r18/000031', 'r15/000091', 'r22/000091', 'r15/000152', 'r22/000152', 'r15/000212', 'r22/000212', 'r18/000309', 'r18/000354', 'r22/000398', 'r22/000442', 'r22/000487', 'r7/000031', 'r7/000091', 'r4/000152', 'r4/000212', 'r7/000309', 'r7/000354', 'r7/000398', 'r7/000442', 'r8/000487', 'v011/000031', 'v011/000091', 'v011/000152', 'v011/000212', 'v011/000272', 'v031/000309', 'v031/000354', 'v031/000398', 'v031/000442', 'v031/000487']
+Number of sub-keys: 63
+
+  Sub-key: '000031'
+  Sub-value type: dict
+  Sub-value keys: ['id', 'secs', 'type', 'metadata', 'objects', 'attention', 'contact', 'spatial', 'verb', 'actions']
+  Number of sub-sub-keys: 12
+    Sub-sub-key: 'id'
+    Sub-sub-value type: str
+    Sub-sub-value: '000031'
+    Sub-sub-key: 'secs'
+    Sub-sub-value type: float
+    Sub-sub-value: 1.3
+    Sub-sub-key: 'type'
+    Sub-sub-value type: str
+    Sub-sub-value: 'frame'
+
+  Sub-key: '000091'
+  Sub-value type: dict
+  Sub-value keys: ['id', 'secs', 'type', 'metadata', 'objects', 'attention', 'contact', 'spatial', 'verb', 'actions']
+  Number of sub-sub-keys: 12
+    Sub-sub-key: 'id'
+    Sub-sub-value type: str
+    Sub-sub-value: '000091'
+    Sub-sub-key: 'secs'
+    Sub-sub-value type: float
+    Sub-sub-value: 3.8
+    Sub-sub-key: 'type'
+    Sub-sub-value type: str
+    Sub-sub-value: 'frame'
+
+  Sub-key: '000152'
+  Sub-value type: dict
+  Sub-value keys: ['id', 'secs', 'type', 'metadata', 'objects', 'attention', 'contact', 'spatial', 'verb', 'actions']
+  Number of sub-sub-keys: 12
+    Sub-sub-key: 'id'
+    Sub-sub-value type: str
+    Sub-sub-value: '000152'
+    Sub-sub-key: 'secs'
+    Sub-sub-value type: float
+    Sub-sub-value: 6.3
+    Sub-sub-key: 'type'
+    Sub-sub-value type: str
+    Sub-sub-value: 'frame'
+
+  Sub-key: '000212'
+  Sub-value type: dict
+  Sub-value keys: ['id', 'secs', 'type', 'metadata', 'objects', 'attention', 'contact', 'spatial', 'verb', 'actions']
+  Number of sub-sub-keys: 12
+    Sub-sub-key: 'id'
+    Sub-sub-value type: str
+    Sub-sub-value: '000212'
+    Sub-sub-key: 'secs'
+    Sub-sub-value type: float
+    Sub-sub-value: 8.8
+    Sub-sub-key: 'type'
+    Sub-sub-value type: str
+    Sub-sub-value: 'frame'
+
+  Sub-key: '000272'
+  Sub-value type: dict
+  Sub-value keys: ['id', 'secs', 'type', 'metadata', 'objects', 'attention', 'contact', 'spatial', 'verb', 'actions']
+  Number of sub-sub-keys: 12
+    Sub-sub-key: 'id'
+    Sub-sub-value type: str
+    Sub-sub-value: '000272'
+    Sub-sub-key: 'secs'
+    Sub-sub-value type: float
+    Sub-sub-value: 11.3
+    Sub-sub-key: 'type'
+    Sub-sub-value type: str
+    Sub-sub-value: 'frame'
+
+--- COMPLETE FIRST ENTRY (safe repr) ---
+Key: '46GP8'
+{'000031': {'id': '000031', 'secs': 1.3, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o17'], 'vertices': [{'id': 'o17/000031', 'type': 'object', 'class': 'o17', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}, '000091': {'id': '000091', 'secs': 3.8, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o17'], 'vertices': [{'id': 'o17/000091', 'type': 'object', 'class': 'o17', 'attention': [...], 'contact': [..., ...], ... (9 more keys)}]}, ... (7 more keys)}, '000152': {'id': '000152', 'secs': 6.3, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o17'], 'vertices': [{'id': 'o17/000152', 'type': 'object', 'class': 'o17', 'attention': [...], 'contact': [..., ...], ... (9 more keys)}]}, ... (7 more keys)}, '000212': {'id': '000212', 'secs': 8.8, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o17'], 'vertices': [{'id': 'o17/000212', 'type': 'object', 'class': 'o17', 'attention': [...], 'contact': [..., ...], ... (9 more keys)}]}, ... (7 more keys)}, '000272': {'id': '000272', 'secs': 11.3, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o17'], 'vertices': [{'id': 'o17/000272', 'type': 'object', 'class': 'o17', 'attention': [], 'contact': [], ... (9 more keys)}]}, ... (7 more keys)}, ... (58 more keys)}
+
+--- SECOND ENTRY ---
+Key: 'N11GT'
+Keys: ['000030', '000039', '000088', '000115', '000147', '000175', '000191', '000203', '000205', '000230']
+  '000030': {'id': '000030', 'secs': 1.2, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o16', 'o4'], 'vertices': [{'id': ..., 'type': ..., 'class': ..., 'attention': ..., 'contact': ..., ... (9 more keys)}, {'id': ..., 'type': ..., 'class': ..., 'attention': ..., 'contact': ..., ... (9 more keys)}]}, ... (7 more keys)}
+  '000039': {'id': '000039', 'secs': 1.6, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o16', 'o4'], 'vertices': [{'id': ..., 'type': ..., 'class': ..., 'attention': ..., 'contact': ..., ... (9 more keys)}, {'id': ..., 'type': ..., 'class': ..., 'attention': ..., 'contact': ..., ... (9 more keys)}]}, ... (7 more keys)}
+  '000088': {'id': '000088', 'secs': 3.5, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o16', 'o4'], 'vertices': [{'id': ..., 'type': ..., 'class': ..., 'attention': ..., 'contact': ..., ... (9 more keys)}, {'id': ..., 'type': ..., 'class': ..., 'attention': ..., 'contact': ..., ... (9 more keys)}]}, ... (7 more keys)}
+
+--- COLLECTING METADATA (from first 20 entries) ---
+Object categories found: []
+Relation types found: []
+Attribute types found: []
+Frame keys found: ['000007', '000012', '000013', '000014', '000016', '000018', '000019', '000020', '000021', '000022', '000025', '000027', '000029', '000030', '000031', '000032', '000034', '000035', '000036', '000039']
+Has bounding boxes: False
+
+
+================================================================================
+FILE 4: AGQA_test_stsgs.pkl
+================================================================================
+File size: 167,761,932 bytes (160.0 MB)
+
+Loading pickle file...
+Top-level type: dict
+Number of top-level keys: 1814
+Sample top-level keys (first 10): ['YSKX3', 'T5ECU', 'AAH6R', '015XE', 'TJZ0P', 'B82GJ', 'A1BS2', 'ZBBOO', 'AF8I2', '4WVTC']
+
+--- First entry ---
+Key: 'YSKX3'
+Value type: dict
+Value keys (first 10): ['000105', '000134', '000163', '000192', '000205', '000209', '000221', '000223', '000224', '000235']
+Number of sub-keys: 172
+
+  Sub-key: '000105'
+  Sub-value type: dict
+  Sub-value: {'id': '000105', 'secs': 6.3, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000105', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}
+
+  Sub-key: '000134'
+  Sub-value type: dict
+  Sub-value: {'id': '000134', 'secs': 8.1, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000134', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}
+
+  Sub-key: '000163'
+  Sub-value type: dict
+  Sub-value: {'id': '000163', 'secs': 9.8, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000163', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}
+
+--- COMPLETE FIRST ENTRY (safe repr) ---
+Key: 'YSKX3'
+{'000105': {'id': '000105', 'secs': 6.3, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000105', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}, '000134': {'id': '000134', 'secs': 8.1, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000134', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}, '000163': {'id': '000163', 'secs': 9.8, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000163', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}, '000192': {'id': '000192', 'secs': 11.5, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4'], 'vertices': [{'id': 'o4/000192', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}, '000205': {'id': '000205', 'secs': 12.3, 'type': 'frame', 'metadata': 'test', 'objects': {'names': ['o4', 'o26'], 'vertices': [{'id': 'o4/000205', 'type': 'object', 'class': 'o4', 'attention': [...], 'contact': [...], ... (9 more keys)}, {'id': 'o26/000205', 'type': 'object', 'class': 'o26', 'attention': [...], 'contact': [...], ... (9 more keys)}]}, ... (7 more keys)}, ... (167 more keys)}

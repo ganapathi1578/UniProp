@@ -1,0 +1,322 @@
+================================================================================
+AGQA DATASET ANALYSIS
+================================================================================
+
+================================================================================
+FILE 1: train_balanced.txt
+================================================================================
+File size: 1,527,743,145 bytes (1457.0 MB)
+Format: Single-line JSON (one giant dictionary)
+First 100 chars: '{"46GP8-893": {"question": "Of all the items they touched, was the first one some food or the last t'
+
+Entries parsed from 300KB chunk: 371
+Estimated total entries: ~1,894,401
+
+--- SCHEMA ---
+All unique field names: ['ans_type', 'answer', 'global', 'local', 'more_steps', 'novel_comp', 'program', 'question', 'semantic', 'sg_grounding', 'steps', 'structural', 'video_id']
+Total fields: 13
+
+--- FIELD TYPES (from first entry) ---
+  ans_type: str = 'binary'
+  answer: str = 'food'
+  global: list = ['superlative', 'obj-rel']
+  local: str = 'r22-o17-o36-r22-o17-o36-all-'
+  more_steps: int = 0
+  novel_comp: int = 0
+  program: str = 'Choose(food, Query(class, OnlyItem(IterateUntil(backward, video, Exists(behind, Filter(frame, [relations])), Filter(frame, [relations, behind, objects])))), IterateUntil(forward, video, XOR(Exists(fo
+  question: str = 'Of all the items they touched, was the first one some food or the last thing they went behind?'
+  semantic: str = 'object'
+  sg_grounding: dict = {'22-29': ['r22/000091'], '28-28': ['000031', '000091', '000152', '000212', '000272', '000309', '000354', '000398', '000442', '000487'], '49-58': ['o17/000091'], '82-93': ['r7/000309', 'r7/000354', 'r
+  steps: int = 4
+  structural: str = 'choose'
+  video_id: str = '46GP8'
+
+--- UNIQUE VALUES ---
+ans_type: ['binary', 'open']
+semantic: ['action', 'object', 'relation']
+structural: ['choose', 'compare', 'logic', 'query', 'verify']
+global (categories): ['action-recognition', 'exists', 'obj-act', 'obj-rel', 'sequencing', 'superlative']
+steps range: 1 to 7
+novel_comp values: [0, 1]
+more_steps values: [0, 1]
+Sample video IDs: ['46GP8', 'KRF68', 'N11GT']
+Total unique video IDs in chunk: 3
+Sample answer values (first 40): ['after', 'before', 'blanket', 'broom', 'clothes', 'door', 'doorknob', 'floor', 'food', 'making some food', 'no', 'phone', 'watching outside of a window', 'window', 'yes']
+
+--- SAMPLE KEY FORMAT ---
+  46GP8-893
+  46GP8-898
+  46GP8-899
+  46GP8-5
+  46GP8-388
+
+--- COMPLETE SAMPLE ENTRIES (3) ---
+
+Key: 46GP8-893
+{
+  "question": "Of all the items they touched, was the first one some food or the last thing they went behind?",
+  "answer": "food",
+  "video_id": "46GP8",
+  "global": [
+    "superlative",
+    "obj-rel"
+  ],
+  "local": "r22-o17-o36-r22-o17-o36-all-",
+  "ans_type": "binary",
+  "steps": 4,
+  "semantic": "object",
+  "structural": "choose",
+  "novel_comp": 0,
+  "more_steps": 0,
+  "program": "Choose(food, Query(class, OnlyItem(IterateUntil(backward, video, Exists(behind, Filter(frame, [relations])), Filter(frame, [relations, behind, objects])))), IterateUntil(forward, video, XOR(Exists(food, Filter(frame, [relations, touching, objects])), Exists(Query(class, OnlyItem(IterateUntil(backward, video, Exists(behind, Filter(frame, [relations])), Filter(frame, [relations, behind, objects])))), Filter(frame, [relations, touching, objects]))), Filter(frame, [relations, touching, objects])))",
+  "sg_grounding": {
+    "22-29": [
+      "r22/000091"
+    ],
+    "28-28": [
+      "000031",
+      "000091",
+      "000152",
+      "000212",
+      "000272",
+      "000309",
+      "000354",
+      "000398",
+      "000442",
+      "000487"
+    ],
+    "49-58": [
+      "o17/000091"
+    ],
+    "82-93": [
+      "r7/000309",
+      "r7/000354",
+      "r7/000398",
+      "r7/000442"
+    ],
+    "62-93": []
+  }
+}
+
+Key: 46GP8-898
+{
+  "question": "Which were they behind last, some food or a window?",
+  "answer": "window",
+  "video_id": "46GP8",
+  "global": [
+    "superlative",
+    "obj-rel"
+  ],
+  "local": "r7-o17-o36-r7-o17-o36-all-",
+  "ans_type": "binary",
+  "steps": 3,
+  "semantic": "object",
+  "structural": "choose",
+  "novel_comp": 0,
+  "more_steps": 0,
+  "program": "Choose(food, window, IterateUntil(backward, video, XOR(Exists(food, Filter(frame, [relations, behind, objects])), Exists(window, Filter(frame, [relations, behind, objects]))), Filter(frame, [relations, behind, objects])))",
+  "sg_grounding": {
+    "16-22": [
+      "r7/000442"
+    ],
+    "26-26": [
+      "000031",
+      "000091",
+      "000152",
+      "000212",
+      "000272",
+      "000309",
+      "000354",
+      "000398",
+      "000442",
+      "000487"
+    ],
+    "29-38": [],
+    "42-50": [
+      "o36/000442"
+    ]
+  }
+}
+
+Key: 46GP8-899
+{
+  "question": "In the video, of all the items they went behind, was the last one a window or the object they were touching first?",
+  "answer": "window",
+  "video_id": "46GP8",
+  "global": [
+    "superlative",
+    "obj-rel"
+  ],
+  "local": "r7-o36-o17-r7-o36-o17-all-",
+  "ans_type": "binary",
+  "steps": 4,
+  "semantic": "object",
+  "structural": "choose",
+  "novel_comp": 0,
+  "more_steps": 0,
+  "program": "Choose(window, Query(class, OnlyItem(IterateUntil(forward, video, Exists(touching, Filter(frame, [relations])), Filter(frame, [relations, touching, objects])))), IterateUntil(backward, video, XOR(Exists(window, Filter(frame, [relations, behind, objects])), Exists(Query(class, OnlyItem(IterateUntil(forward, video, Exists(touching, Filter(frame, [relations])), Filter(frame, [relations, touching, objects])))), Filter(frame, [relations, behind, objects]))), Filter(frame, [relations, behind, objects])))",
+  "sg_grounding": {
+    "0-12": [
+      "000031",
+      "000091",
+      "000152",
+      "000212",
+      "000272",
+      "000309",
+      "000354",
+      "000398",
+      "000442",
+      "000487"
+    ],
+    "36-47": [
+      "r7/000442"
+    ],
+    "66-74": [
+      "o36/000442"
+    ],
+    "99-107": [
+      "r22/000091",
+      "r22/000152",
+      "r22/000212"
+    ],
+    "78-113": []
+  }
+}
+
+--- sg_grounding STRUCTURE ---
+Key: 46GP8-893
+  sg_grounding keys: ['22-29', '28-28', '49-58', '82-93', '62-93']
+    22-29: ['r22/000091']
+    28-28: ['000031', '000091', '000152', '000212', '000272', '000309', '000354', '000398', '000442', '000487']
+    49-58: ['o17/000091']
+    82-93: ['r7/000309', 'r7/000354', 'r7/000398', 'r7/000442']
+    62-93: []
+Key: 46GP8-898
+  sg_grounding keys: ['16-22', '26-26', '29-38', '42-50']
+    16-22: ['r7/000442']
+    26-26: ['000031', '000091', '000152', '000212', '000272', '000309', '000354', '000398', '000442', '000487']
+    29-38: []
+    42-50: ['o36/000442']
+Key: 46GP8-899
+  sg_grounding keys: ['0-12', '36-47', '66-74', '99-107', '78-113']
+    0-12: ['000031', '000091', '000152', '000212', '000272', '000309', '000354', '000398', '000442', '000487']
+    36-47: ['r7/000442']
+    66-74: ['o36/000442']
+    99-107: ['r22/000091', 'r22/000152', 'r22/000212']
+    78-113: []
+
+
+================================================================================
+FILE 2: test_balanced.txt
+================================================================================
+File size: 789,587,666 bytes (753.0 MB)
+Entries parsed from chunk: 289
+Estimated total entries: ~763,268
+All unique field names (test): ['ans_type', 'answer', 'direct_equiv', 'global', 'i_act', 'i_obj', 'i_rel', 'i_temp', 'indirect', 'local', 'more_steps', 'nc_dur', 'nc_objrel', 'nc_seq', 'nc_sup', 'novel_comp', 'program', 'question', 'semantic', 'sg_grounding', 'steps', 'structural', 'video_id']
+Test-specific fields (not in train): ['direct_equiv', 'i_act', 'i_obj', 'i_rel', 'i_temp', 'indirect', 'nc_dur', 'nc_objrel', 'nc_seq', 'nc_sup']
+Train-specific fields (not in test): []
+
+--- COMPLETE SAMPLE ENTRIES (test, 2) ---
+
+Key: YSKX3-8
+{
+  "question": "Were they interacting with a blanket while holding a pillow?",
+  "answer": "no",
+  "video_id": "YSKX3",
+  "global": [
+    "exists"
+  ],
+  "local": "yes-no-o4-while-c076",
+  "ans_type": "binary",
+  "steps": 3,
+  "semantic": "object",
+  "structural": "verify",
+  "novel_comp": 0,
+  "more_steps": 0,
+  "program": "Exists(blanket, Iterate(Localize(while, holding a pillow), Filter(frame, [objects])))",
+  "sg_grounding": {
+    "27-36": [],
+    "43-59": [
+      "c076/1"
+    ],
+    "37-59": [
+      "000247",
+      "000252",
+      "000254",
+      "000258",
+      "000268",
+      "000269",
+      "000270"
+    ]
+  },
+  "nc_seq": 0,
+  "nc_sup": 0,
+  "nc_dur": 0,
+  "nc_objrel": 0,
+  "indirect": 1,
+  "i_obj": 0,
+  "i_rel": 0,
+  "i_act": 0,
+  "i_temp": 1,
+  "direct_equiv": "YSKX3-9"
+}
+
+Key: YSKX3-9
+{
+  "question": "Was a blanket one of the things they were interacting with?",
+  "answer": "yes",
+  "video_id": "YSKX3",
+  "global": [
+    "exists"
+  ],
+  "local": "yes-no-o4-all-",
+  "ans_type": "binary",
+  "steps": 1,
+  "semantic": "object",
+  "structural": "verify",
+  "novel_comp": 0,
+  "more_steps": 0,
+  "program": "Exists(blanket, Iterate(video, Filter(frame, [objects])))",
+  "sg_grounding": {
+    "4-13": [
+      "o4/000209",
+      "o4/000223",
+      "o4/000105",
+      "o4/000134",
+      "o4/000192",
+      "o4/000163",
+      "o4/000224"
+    ],
+    "57-57": [
+      "000105",
+      "000134",
+      "000163",
+      "000192",
+      "000205",
+      "000209",
+      "000221",
+      "000223",
+      "000224",
+      "000235",
+      "000237",
+      "000239",
+      "000247",
+      "000252",
+      "000254",
+      "000258",
+      "000268",
+      "000269",
+      "000270"
+    ]
+  },
+  "nc_seq": 0,
+  "nc_sup": 0,
+  "nc_dur": 0,
+  "nc_objrel": 0,
+  "indirect": 0,
+  "i_obj": 0,
+  "i_rel": 0,
+  "i_act": 0,
+  "i_temp": 0,
+  "direct_equiv": "YSKX3-9"
+}

@@ -1,0 +1,1 @@
+# Dataset Split Report\n\n- Train Videos (Universe): 7009\n- Val Videos (Universe): 778\n- Test Videos (Universe): 1814\n\n### Generated Examples by Split\n- TRAIN: 7727\n- VAL: 273\n

@@ -1,0 +1,37 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+venv/
+env/
+env_ml_learning_1/
+.venv/
+.env/
+
+# Source Datasets
+AGQA_balanced/
+AGQA_scene_graphs/
+AGQA/
+data_raw/
+data_tokenized/
+*.zip
+*.tar.gz
+
+# Generated Data
+data/
+*.parquet
+*.parquet.dict
+
+# Models / Checkpoints
+*.pt
+*.pth
+*.ckpt
+checkpoints/
+
+# IDE / OS files
+.DS_Store
+.idea/
+.vscode/
+*.swp
