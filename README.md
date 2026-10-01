@@ -51,4 +51,20 @@ Data is output natively to `data/generated/`.
 **Generated datasets and source datasets are strictly excluded from Git.**
 
 ### Documentation Index
-See [docs/README.md](docs/README.md) for full architecture, schema, generation, and troubleshooting guides.
+
+**Comprehensive Documents (`docs/`):**
+- [Architecture](docs/ARCHITECTURE.md): Data flow from source json -> proposition logic -> parquet strings.
+- [Data Schema](docs/DATA_SCHEMA.md): PyArrow schema definition with explicit invariables (`len(options) == len(labels)`).
+- [Label Semantics](docs/LABEL_SEMANTICS.md): Separation of semantic `truth_state` (`TRUE`/`FALSE`/`UNKNOWN`) vs labels (`1`/`0`).
+- [Provenance](docs/PROVENANCE.md): `video_id` tracking mandate.
+- [Installation](docs/INSTALLATION.md): Clean environment setup with `requirements.txt`.
+- [Configuration](docs/CONFIGURATION.md): Explanation of `main_pipeline.py` defaults (e.g. `SEED=42`).
+- [Generation](docs/GENERATION.md): Commands and runtime architecture details (flushing buffers).
+- [Validation](docs/VALIDATION.md): Quality gates currently active (mutual exclusivity, range checks).
+- [Data Layout](docs/DATA_LAYOUT.md): `data/generated/` and source datasets overview.
+- [Resource Requirements](docs/RESOURCE_REQUIREMENTS.md): Scaling extrapolation for large parquet strings.
+- [Reproducibility](docs/REPRODUCIBILITY.md): Tri-layer randomness locks (`PYTHONHASHSEED`, `random.seed`, `random.Random()`).
+- [Production Runbook](docs/PRODUCTION_RUNBOOK.md): Sequential checklist for initiating and recovering large 10M+ runs.
+- [Troubleshooting](docs/TROUBLESHOOTING.md): Common failures and file-system recoveries.
+- [Development](docs/DEVELOPMENT.md): Creating new Generators and Reasoners.
+- [Git Policy](docs/GIT_POLICY.md): Rigid definition of what never touches Git.
