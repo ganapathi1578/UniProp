@@ -3,6 +3,15 @@ from src.datasets.normalized import NormalizedQA
 from src.candidates.more_options import TemporalOptionizer
 from src.candidates.object_options import ObjectOptionizer
 from src.candidates.binary_options import BinaryOptionizer
+from src.normalization.scene_graph_normalizer import NormalizedSceneGraph
+
+class MockEvaluator:
+    def get_scenegraph(self, video_id):
+        return NormalizedSceneGraph(video_id=video_id, split="train", frames={}, actions={})
+        
+    def evaluate(self, record, candidate, context):
+        ans = str(record.source_answer).strip().lower()
+        return "TRUE" if candidate.lower() == ans else "FALSE"
 
 def test_temporal_optionizer_regression():
     record = NormalizedQA(
@@ -17,7 +26,8 @@ def test_temporal_optionizer_regression():
         reasoning_type="obj-act-sequencing"
     )
     generator = TemporalOptionizer()
-    options, labels, truth = generator.generate(record, {}, max_k=40)
+    context = {"evaluator": MockEvaluator()}
+    options, labels, truth = generator.generate(record, context, max_k=40)
     
     assert set(options) == {"before", "after"}
     assert len(options) == 2
@@ -38,14 +48,12 @@ def test_binary_optionizer():
         reasoning_type="obj-ex"
     )
     generator = BinaryOptionizer()
-    options, labels, truth = generator.generate(record, {}, max_k=40)
+    context = {"evaluator": MockEvaluator()}
+    options, labels, truth = generator.generate(record, context, max_k=40)
     assert set(options) == {"Yes", "No"}
     assert options[labels.index(1)] == "Yes"
 
 def test_query_immutability():
-    # Pipeline invariant test: query must == source_question
-    # This is implicitly verified by the fact that NormalizedQA maps query directly from source,
-    # and the generator doesn't modify it. We verify this via mock.
     record = NormalizedQA(
         source_dataset="agqa_balanced",
         source_question_id="123",
@@ -58,3 +66,44 @@ def test_query_immutability():
         reasoning_type="obj-ex"
     )
     assert record.query == "Exact source question?"
+
+class TrueEvaluatorEvidenceMock:
+    def get_scenegraph(self, video_id):
+        class Obj:
+            def __init__(self, name):
+                self.name = name
+        class Frame:
+            def __init__(self, objs):
+                self.objects = objs
+        
+        frames = {
+            "f1": Frame({"1": Obj("window"), "2": Obj("chair")})
+        }
+        return NormalizedSceneGraph(video_id=video_id, split="train", frames=frames, actions={})
+        
+    def evaluate(self, record, candidate, context):
+        if candidate == "window": return "TRUE"
+        if candidate == "chair": return "FALSE"
+        return "UNKNOWN"
+
+def test_object_evidence_path():
+    record = NormalizedQA(
+        source_dataset="agqa_balanced",
+        source_question_id="test-obj-1",
+        video_id="46GP8",
+        query="Which object did they interact with?",
+        source_answer="window",
+        answer_type="object",
+        semantic_type="object",
+        structural_type="query",
+        reasoning_type="obj-ex"
+    )
+    generator = ObjectOptionizer()
+    context = {"evaluator": TrueEvaluatorEvidenceMock()}
+    options, labels, truth = generator.generate(record, context, max_k=40)
+    
+    # window should be true, chair should be false
+    assert "window" in options
+    assert "chair" in options
+    assert labels[options.index("window")] == 1
+    assert labels[options.index("chair")] == 0

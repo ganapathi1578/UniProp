@@ -29,6 +29,10 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
     success_count = 0
     rejected_count = 0
     
+    from src.reasoning.evidence import TruthEvaluator
+    sg_path = config.get("scenegraph_path", "data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl")
+    evaluator = TruthEvaluator(sg_path)
+
     for idx, record in enumerate(records):
         if max_records and idx >= max_records:
             break
@@ -41,8 +45,8 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
             
         generator = generator_class()
         
-        # In a full implementation, context would contain scenegraph info
-        context = {} 
+        # Scenegraph info passed via evaluator
+        context = {"evaluator": evaluator}  
         
         try:
             options, labels, truth_state = generator.generate(record, context, max_k=config.get("max_k", 40))
@@ -50,8 +54,13 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
             
             # Record original zip before shuffling to ensure label consistency
             original_pairs = set(zip(options, labels))
+        except ValueError as e:
+            reason = str(e)
+            print(f"REJECTED: [{record.source_question_id}] [{record.video_id}] {reason}")
+            rejected_count += 1
+            continue
         except Exception as e:
-            print("Generate error:", e)
+            print(f"REJECTED: [{record.source_question_id}] [{record.video_id}] Exception: {e}")
             rejected_count += 1
             continue
             
