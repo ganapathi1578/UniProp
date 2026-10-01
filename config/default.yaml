@@ -1,0 +1,3 @@
+dataset: agqa
+output_dir: data/generated/agqa_balanced
+format: parquet
