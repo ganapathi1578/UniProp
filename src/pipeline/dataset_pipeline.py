@@ -35,9 +35,7 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
             
         generator_class = candidate_registry.get_generator(record.answer_type)
         if not generator_class:
-            # Fallback to a default generic if not registered
-            # But the user said: "Do not claim support ... unless actually exists"
-            # So if not found, we reject or skip
+            print(f"REJECTED: [{record.source_question_id}] [{record.video_id}] Unsupported answer domain: {record.answer_type}")
             rejected_count += 1
             continue
             
@@ -48,6 +46,10 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
         
         try:
             options, labels, truth_state = generator.generate(record, context, max_k=config.get("max_k", 40))
+            assert len(options) == len(labels), "Length mismatch between options and labels"
+            
+            # Record original zip before shuffling to ensure label consistency
+            original_pairs = set(zip(options, labels))
         except Exception as e:
             print("Generate error:", e)
             rejected_count += 1
@@ -59,6 +61,9 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
         options, labels = zip(*combined)
         options = list(options)
         labels = list(labels)
+        
+        # Verify the same option always receives the same label
+        assert set(zip(options, labels)) == original_pairs, "Option/Label consistency corrupted during shuffle"
         
         # Build propositions schema
         propositions = []
@@ -114,5 +119,26 @@ def run_dataset_pipeline(config: dict, split: str, max_records: int = None):
     if groups:
         out_path = os.path.join(out_dir, f"part-{shard_idx:06d}.parquet")
         write_shard(groups, out_path)
+        
+    print(f"\n--- AUDIT REPORT ---")
+    print(f"Source records read: {idx+1}")
+    print(f"Successfully optionized: {success_count}")
+    print(f"Rejected: {rejected_count}")
+    print("\nBy answer domain:")
+    
+    from collections import Counter
+    domains = Counter(g.provenance.generation_rule for g in groups) if groups else {}
+    
+    all_possible_domains = [
+        "binary", "object", "action", "count", "temporal",
+        "comparison", "superlative", "three_way", "logic", "open", "other"
+    ]
+    
+    for d in all_possible_domains:
+        count = domains.get(d, 0)
+        is_implemented = bool(candidate_registry.get_generator(d))
+        status = count if is_implemented else "NOT IMPLEMENTED"
+        print(f"  {d.upper()}: {status}")
+    print("--------------------\n")
         
     return success_count, rejected_count
