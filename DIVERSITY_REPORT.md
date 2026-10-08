@@ -1,19 +1,41 @@
-# Diversity & Production Audit
+# Video-Jev Controlled Sampling Matrix & Diversity Report
 
-- Unique Source Videos Used: 395
-- Average Examples / Video: 253.16
-- Average Examples / Evidence Signature: 7.25
-- Unique Proposition Signatures: 18335
-- Unique Option Sets (Group level): 100000
-- Unique Query Templates Used: 39
-- Duplicate Catch Ratio: 76.53%
-- Evidence Reuse Ratio: 86.20%
+- Unique Source Videos Used: 8545
+- Average Examples / Video: 1.17
+- Average Examples / Evidence Signature: 4.66
+- Unique Proposition Signatures: 15212
+- Unique Option Sets (Group level): 7416
+- Duplicate Catch Ratio: 0.02%
+- Evidence Reuse Ratio: 78.54%
 
-### General Statistics
-- Truth States: {'FALSE': 1100882, 'TRUE': 155858, 'UNKNOWN': 1}
-- Logical NONE Included: 17473 (True=2109, False=15364)
-- Task Types: {'single_choice': 56134, 'three_way': 1, 'multi_label': 25416, 'binary': 18449}
-- Reasoning Families: {'object': 22183, 'attention': 443, 'grounding': 21249, 'temporal': 13609, 'compositional': 23348, 'spatial': 7274, 'action': 10615, 'contact': 1279}
-- K Counts: {26: 729, 13: 4894, 3: 2, 9: 4303, 8: 3554, 19: 3662, 2: 18460, 17: 3522, 20: 3603, 27: 316, 21: 3465, 14: 4200, 11: 7259, 28: 217, 22: 3466, 24: 3035, 15: 3764, 18: 3550, 12: 6044, 7: 2616, 23: 3343, 25: 1686, 10: 7758, 16: 3577, 6: 1673, 5: 743, 29: 168, 30: 103, 31: 78, 32: 55, 4: 92, 33: 31, 36: 8, 35: 9, 34: 13, 37: 2}
-- Temporal Subtypes: {'before': 9217, 'multihop': 4392}
-- Temporal Hops: {1: 9217, 2: 4392}
+### Controlled Sampling Matrix Statistics
+- Reasoning Families (Target: 20% Action, 20% Temporal, 20% Comp, 15% Obj, 15% Spatial/Contact, 10% Grounding):
+  - object: 1500 (15.0%)
+  - grounding: 1000 (10.0%)
+  - compositional: 2000 (20.0%)
+  - action: 2000 (20.0%)
+  - temporal: 2000 (20.0%)
+  - spatial: 546 (5.5%)
+  - contact: 566 (5.7%)
+  - attention: 388 (3.9%)
+
+- Task Modalities (Target: 45% Single-Choice, 25% Binary, 20% Multi-Label, 10% Three-Way):
+  - single_choice: 4500 (45.0%)
+  - multi_label: 2000 (20.0%)
+  - three_way: 1000 (10.0%)
+  - binary: 2500 (25.0%)
+
+- Reasoning Depth / Hops (Target: 20% 1-hop, 30% 2-hop, 30% 3-hop, 20% 4+ hop):
+  - 1-hop: 2000 (20.0%)
+  - 2-hop: 3000 (30.0%)
+  - 3-hop: 3000 (30.0%)
+  - 4-hop: 2000 (20.0%)
+
+- Negative Difficulty (Target: 20% Easy, 40% Medium, 40% Hard):
+  - medium: 4000 (40.0%)
+  - easy: 2000 (20.0%)
+  - hard: 4000 (40.0%)
+
+- Truth States: {'FALSE': 81328, 'TRUE': 11871, 'UNKNOWN': 1408}
+- Logical NONE Included: 1398 (True=202, False=1196)
+- K Counts: {10: 340, 21: 122, 6: 502, 3: 1018, 9: 399, 2: 2501, 33: 32, 11: 411, 7: 544, 4: 377, 14: 169, 8: 580, 5: 473, 23: 99, 12: 375, 13: 310, 16: 97, 27: 140, 17: 105, 40: 40, 24: 120, 15: 133, 26: 155, 38: 40, 34: 32, 25: 162, 19: 96, 18: 87, 39: 35, 20: 92, 32: 44, 22: 107, 29: 37, 35: 35, 37: 31, 30: 31, 28: 72, 36: 24, 31: 33}

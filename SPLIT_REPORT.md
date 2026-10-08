@@ -5,6 +5,6 @@
 - Test Videos (Universe): 1814
 
 ### Generated Examples by Split
-- TRAIN: 68887
-- VAL: 11113
-- TEST: 20000
+- TRAIN: 8000
+- VAL: 1000
+- TEST: 1000

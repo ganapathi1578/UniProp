@@ -1,0 +1,60 @@
+# Video-Jev 100K Dataset Configuration
+dataset_name: "agqa_scene_graphs"
+version: "1.0"
+scale: "100k"
+
+paths:
+  dataset_root: "data/dataset"
+  scene_graphs_train: "data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl"
+  scene_graphs_test: "data/dataset/agqa_scene_graphs/AGQA_test_stsgs.pkl"
+  qa_train: "data/dataset/agqa_balanced/train_balanced.txt"
+  qa_test: "data/dataset/agqa_balanced/test_balanced.txt"
+  output_dir: "data/generated"
+
+generation:
+  seed: 42
+  shard_size: 50000
+
+splits:
+  video_split_ratio:
+    train: 0.80
+    val: 0.10
+    test: 0.10
+  target_counts:
+    train: 80000
+    val: 10000
+    test: 10000
+
+distributions:
+  reasoning_families:
+    action: 0.20
+    temporal: 0.20
+    compositional: 0.20
+    object: 0.15
+    spatial_contact: 0.15
+    grounding: 0.10
+
+  task_modalities:
+    single_choice: 0.45
+    binary: 0.25
+    multi_label: 0.20
+    three_way: 0.10
+
+  option_counts:
+    k_2: 0.25
+    k_3: 0.10
+    k_4_8: 0.25
+    k_9_15: 0.20
+    k_16_28: 0.15
+    k_29_40: 0.05
+
+  reasoning_depth:
+    hop_1: 0.20
+    hop_2: 0.30
+    hop_3: 0.30
+    hop_4_plus: 0.20
+
+  negative_difficulty:
+    easy: 0.20
+    medium: 0.40
+    hard: 0.40

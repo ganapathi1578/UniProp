@@ -1,4 +1,4 @@
-﻿"""Validators for generated examples."""
+"""Validators for generated examples."""
 import re
 from typing import List, Tuple
 from src.schema import PropositionGroup
@@ -35,7 +35,7 @@ def validate_example(group: PropositionGroup) -> Tuple[bool, List[str]]:
                 errors.append("Single-choice object task must use a single-object selection query")
             elif group.task_type == "multi_label" and not tid.startswith("obj_m"):
                 errors.append("Multi-label object task must use a selection/set query")
-        elif group.reasoning.family in ["spatial", "contact", "attention"]:
+        elif group.reasoning.family in ["spatial", "contact", "attention", "spatial_contact"]:
             if group.task_type in ["binary", "three_way"] and not tid.startswith("rel_v"):
                 errors.append("Binary relation proposition must use a relation verification query")
         elif group.reasoning.family == "temporal" and not tid.startswith("temp"):
@@ -66,9 +66,9 @@ def validate_example(group: PropositionGroup) -> Tuple[bool, List[str]]:
             rels = p.semantics.predicate.split(" and ")
             for r in rels:
                 sig = ("relation", p.semantics.subject, r, p.semantics.object)
-                if p.truth_state == "TRUE":
+                if p.truth_state == "TRUE" and p.semantics.polarity == "positive":
                     add_semantics("TRUE", "positive", sig)
-                # If FALSE, we don't know which is false, so we don't add to negative_semantics
+                # If FALSE or negative polarity, we don't know which is false, so we don't add to negative_semantics
             continue
             
         if p.semantics.canonical_type == "temporal":
