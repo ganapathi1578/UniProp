@@ -39,11 +39,17 @@ cd UniProp
 # 2. Setup environment
 pip install -r requirements.txt
 
-# 3. Source Data (Must be downloaded manually)
-# Place AGQA_balanced/ and AGQA_scene_graphs/ in the root directory.
+# 3. Source Data
+# Download and extract the required AGQA scene graphs automatically:
+bash scripts/download_agqa_scenegraphs.sh
 
 # 4. Generate Dataset
-python main_pipeline.py
+# You must specify a configuration file to run the pipeline.
+# For a quick verification run:
+python main_pipeline.py --config config/generation/smoke_test.yaml
+
+# For standard scale runs (10k, 100k, 1m, etc.):
+# python main_pipeline.py --config config/generation/10k.yaml
 ```
 
 ### Output & Data Policy
