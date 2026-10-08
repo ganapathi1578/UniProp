@@ -1,25 +1,29 @@
 from typing import List, Tuple
-from src.candidates.base import CandidateGenerator
 from src.datasets.normalized import NormalizedQA
+from src.candidates.base import CandidateGenerator
 
 class CountOptionizer(CandidateGenerator):
-    def generate(self, record: NormalizedQA, context: dict, max_k: int) -> Tuple[List[str], List[int], str]:
-        try:
-            true_count = int(str(record.source_answer).strip())
-        except ValueError:
-            return [str(record.source_answer)], [1], "UNKNOWN"
+    def generate(self, record: NormalizedQA, context: dict, max_k: int = 40) -> Tuple[List[str], List[int], str]:
+        # We did not observe COUNT questions in the 1000-record sample or quick scans.
+        # But if they occur, the true answer should be a number.
+        true_ans = str(record.source_answer).lower().strip()
+        
+        if not true_ans.isdigit():
+            raise ValueError("evaluator_unsupported: count answer is not numeric")
             
+        true_count = int(true_ans)
+        
+        # Make configurable later, for now max out at true_count + max_k/2
+        start = max(0, true_count - 5)
         options = []
         labels = []
         
-        # Simple policy: true count + sequential numbers
-        # e.g., if true=3, K=5 -> 1, 2, 3, 4, 5
-        # If true=0, K=5 -> 0, 1, 2, 3, 4
-        
-        start_count = max(0, true_count - (max_k // 2))
-        for i in range(max_k):
-            cand = start_count + i
-            options.append(str(cand))
-            labels.append(1 if cand == true_count else 0)
+        for i in range(start, start + min(max_k, 10)):
+            opt = str(i)
+            options.append(opt)
+            labels.append(1 if opt == true_ans else 0)
+            
+        if sum(labels) == 0:
+            raise ValueError("source_evidence_mismatch")
             
         return options, labels, "TRUE"

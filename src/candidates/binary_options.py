@@ -8,31 +8,36 @@ class BinaryOptionizer(CandidateGenerator):
         
         evaluator = context.get("evaluator")
         if not evaluator:
-            raise ValueError("MISSING_EVALUATOR")
+            raise ValueError("missing_evaluator")
             
-        sg = evaluator.get_scenegraph(record.video_id)
+        sg = evaluator.get_scenegraph(record.video_id, getattr(record.source_metadata, "split", "train") if hasattr(record, "source_metadata") else "train")
         if not sg:
-            raise ValueError("MISSING_SCENEGRAPH")
+            raise ValueError("missing_evidence")
             
-        # evaluate the YES option
-        truth = evaluator.evaluate(record, "Yes", context)
-        
-        # Consistency check with source answer
+        from src.reasoning.semantic_engine import SemanticEngine
+        from src.reasoning.program_parser import parse_agqa_program
+        from src.reasoning.semantic_types import SemanticType
+
+        try:
+            ast = parse_agqa_program(record.source_program)
+            engine = SemanticEngine(sg)
+            res = engine.evaluate(ast)
+        except Exception as e:
+            # Let the semantic engine's exceptions bubble up (e.g. EvaluatorUnsupportedError)
+            raise
+
         ans = str(record.source_answer).lower().strip()
         
-        if truth == "TRUE":
-            if ans == "no":
-                raise ValueError("SOURCE_EVIDENCE_MISMATCH")
-            labels = [1, 0]
-            truth_state = "TRUE"
-        elif truth == "FALSE":
-            if ans == "yes":
-                raise ValueError("SOURCE_EVIDENCE_MISMATCH")
-            labels = [0, 1]
-            truth_state = "FALSE"
-        else:
-            options.append("Cannot say")
-            labels = [0, 0, 1]
+        if res.type == SemanticType.UNKNOWN:
             truth_state = "UNKNOWN"
+            is_yes = (ans == "yes")
+        elif res.type == SemanticType.BOOLEAN:
+            truth_state = "TRUE" if res.value else "FALSE"
+            is_yes = res.value
+            if (is_yes and ans != "yes") or (not is_yes and ans != "no"):
+                raise ValueError("source_evidence_mismatch")
+        else:
+            raise ValueError(f"evaluator_unsupported:non_boolean_result({res.type})")
             
+        labels = [1, 0] if is_yes else [0, 1]
         return options, labels, truth_state

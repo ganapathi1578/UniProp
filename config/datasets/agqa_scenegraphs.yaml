@@ -1,0 +1,14 @@
+dataset: "agqa_scenegraphs"
+split: "train"
+source:
+  scenegraph_path: "data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl"
+selection:
+  mode: "target_size"
+  target_records: 1000000
+generation:
+  seed: 42
+output:
+  root_dir: "data/generated/agqa_scenegraphs"
+  scale: "1m"
+  shard_size: 10000
+  format: "parquet"

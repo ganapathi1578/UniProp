@@ -1,7 +1,20 @@
 dataset: "agqa_balanced"
-balanced_path: "data/dataset/agqa_balanced/train_balanced.txt"
-scenegraph_path: "data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl"
-output_dir: "data/generated/agqa_balanced/1m"
-seed: 42
-max_k: 40
-shard_size: 10000
+selection:
+  mode: "all"
+  max_records: null
+generation:
+  max_k: 40
+  seed: 42
+output:
+  root_dir: "data/generated/agqa_balanced"
+  shard_size: 10000
+  format: "parquet"
+splits:
+  train:
+    source:
+      qa_path: "data/dataset/agqa_balanced/train_balanced.txt"
+      scenegraph_path: "data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl"
+  test:
+    source:
+      qa_path: "data/dataset/agqa_balanced/test_balanced.txt"
+      scenegraph_path: "data/dataset/agqa_scene_graphs/AGQA_test_stsgs.pkl"
