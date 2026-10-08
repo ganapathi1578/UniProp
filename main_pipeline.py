@@ -47,8 +47,15 @@ def main():
     ]
     
     print("Loading AGQA Scene Graphs...", flush=True)
-    train_sg_path = os.path.join(DATA_ROOT, "AGQA_scene_graphs", "AGQA_train_stsgs.pkl")
-    test_sg_path = os.path.join(DATA_ROOT, "AGQA_scene_graphs", "AGQA_test_stsgs.pkl")
+    def resolve_path(*candidates):
+        for c in candidates:
+            p = os.path.join(DATA_ROOT, c)
+            if os.path.exists(p):
+                return p
+        return os.path.join(DATA_ROOT, candidates[0])
+
+    train_sg_path = resolve_path("data/dataset/agqa_scene_graphs/AGQA_train_stsgs.pkl", "AGQA_scene_graphs/AGQA_train_stsgs.pkl")
+    test_sg_path = resolve_path("data/dataset/agqa_scene_graphs/AGQA_test_stsgs.pkl", "AGQA_scene_graphs/AGQA_test_stsgs.pkl")
     
     with open(train_sg_path, 'rb') as f:
         train_sgs_raw = pickle.load(f)
@@ -276,13 +283,13 @@ def main():
                         if "identification" in group.reasoning.type: stats["grounding_subtypes"]["identification"] += 1
                         elif "verification" in group.reasoning.type: stats["grounding_subtypes"]["verification"] += 1
 
-    train_qs_path = os.path.join(DATA_ROOT, "AGQA_balanced", "AGQA_balanced", "train_balanced.txt")
-    test_qs_path = os.path.join(DATA_ROOT, "AGQA_balanced", "AGQA_balanced", "test_balanced.txt")
+    train_qs_path = resolve_path("data/dataset/agqa_balanced/train_balanced.txt", "data/dataset/agqa_balanced/AGQA_balanced/train_balanced.txt", "AGQA_balanced/AGQA_balanced/train_balanced.txt")
+    test_qs_path = resolve_path("data/dataset/agqa_balanced/test_balanced.txt", "data/dataset/agqa_balanced/AGQA_balanced/test_balanced.txt", "AGQA_balanced/AGQA_balanced/test_balanced.txt")
     
-    # 1. Train/Val Gen (800000)
-    process_split(train_qs_path, train_sgs_raw, False, 8000)
-    # 2. Test Gen (200000)
-    process_split(test_qs_path, test_sgs_raw, True, 2000)
+    # 1. Train/Val Gen (80000)
+    process_split(train_qs_path, train_sgs_raw, False, 80000)
+    # 2. Test Gen (cumulative 100000)
+    process_split(test_qs_path, test_sgs_raw, True, 100000)
     
     print("\\nValidating Constraints and Generating Reports...", flush=True)
     
