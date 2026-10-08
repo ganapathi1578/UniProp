@@ -1,4 +1,4 @@
-﻿"""Natural Language Renderer for Propositions."""
+"""Natural Language Renderer for Propositions."""
 
 # Mapping to handle grammar
 UNCOUNTABLE_OBJECTS = {"food", "clothes", "medicine", "water", "paper"}
@@ -38,8 +38,11 @@ def render_relation(rel_name: str, obj_name: str, polarity: str) -> str:
     rel_name = rel_name.replace("have it on the back", "carrying on their back")
     rel_name = rel_name.replace("other relationship", "interacting with")
     np = render_noun_phrase(obj_name, definite=True)
-    neg = "not " if polarity == "negative" else ""
-    return f"The person is {neg}{rel_name} {np}."
+    if polarity == "negative":
+        if rel_name.startswith("not "):
+            return f"The person is {rel_name[4:]} {np}."
+        return f"The person is not {rel_name} {np}."
+    return f"The person is {rel_name} {np}."
 
 def render_action(phrase: str, polarity: str = "positive") -> str:
     if not phrase:
