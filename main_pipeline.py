@@ -306,63 +306,63 @@ def main():
     
     # Write Sample Report
     with open("SAMPLE_REPORT.md", "w") as f:
-        f.write("# V5 Logical Correctness Sample Report\\n\\n")
+        f.write("# V5 Logical Correctness Sample Report\n\n")
         for rule, groups in by_rule.items():
-            f.write(f"## Generation Rule: {rule}\\n")
+            f.write(f"## Generation Rule: {rule}\n")
             for group in groups:
-                f.write(f"**Example ID:** {group.example_id} | **Split:** {group.split}\\n")
-                f.write(f"**Task Type:** {group.task_type} | **K:** {group.num_propositions}\\n")
-                if group.query_text: f.write(f"**Query:** {group.query_text}\\n")
-                f.write(f"**Options:**\\n")
+                f.write(f"**Example ID:** {group.example_id} | **Split:** {group.split}\n")
+                f.write(f"**Task Type:** {group.task_type} | **K:** {group.num_propositions}\n")
+                if group.query_text: f.write(f"**Query:** {group.query_text}\n")
+                f.write(f"**Options:**\n")
                 for p in group.propositions:
                     l = p.label if p.label is not None else "?"
-                    f.write(f"  - [{l}] {p.text} (Truth: {p.truth_state})\\n")
-                f.write("\\n")
+                    f.write(f"  - [{l}] {p.text} (Truth: {p.truth_state})\n")
+                f.write("\n")
                 
     # Write Validation Report
     with open("VALIDATION_REPORT.md", "w") as f:
-        f.write("# V5 Validation Report\\n\\n")
-        f.write(f"- Total Candidates: {stats['total_candidates']}\\n")
-        f.write(f"- Total Accepted: {total_accepted}\\n")
-        f.write(f"- Total Rejected: {sum(stats['rejected'].values())}\\n")
-        f.write(f"- Duplicates Caught: {stats['duplicate_count']}\\n\\n")
-        f.write("### Rejection Reasons\\n")
+        f.write("# V5 Validation Report\n\n")
+        f.write(f"- Total Candidates: {stats['total_candidates']}\n")
+        f.write(f"- Total Accepted: {total_accepted}\n")
+        f.write(f"- Total Rejected: {sum(stats['rejected'].values())}\n")
+        f.write(f"- Duplicates Caught: {stats['duplicate_count']}\n\n")
+        f.write("### Rejection Reasons\n")
         for reason, count in stats["rejection_reasons"].items():
-            f.write(f"- {count}: {reason}\\n")
+            f.write(f"- {count}: {reason}\n")
             
     # Write Split Report
     with open("SPLIT_REPORT.md", "w") as f:
-        f.write("# Dataset Split Report\\n\\n")
-        f.write(f"- Train Videos (Universe): {len(train_vids_set)}\\n")
-        f.write(f"- Val Videos (Universe): {len(val_vids)}\\n")
-        f.write(f"- Test Videos (Universe): {len(test_vids)}\\n\\n")
-        f.write("### Generated Examples by Split\\n")
+        f.write("# Dataset Split Report\n\n")
+        f.write(f"- Train Videos (Universe): {len(train_vids_set)}\n")
+        f.write(f"- Val Videos (Universe): {len(val_vids)}\n")
+        f.write(f"- Test Videos (Universe): {len(test_vids)}\n\n")
+        f.write("### Generated Examples by Split\n")
         for s, c in stats["split_counts"].items():
-            f.write(f"- {s.upper()}: {c}\\n")
+            f.write(f"- {s.upper()}: {c}\n")
             
     # Write Diversity Report
     with open("DIVERSITY_REPORT.md", "w") as f:
-        f.write("# Diversity & Production Audit\\n\\n")
+        f.write("# Diversity & Production Audit\n\n")
         dup_ratio = stats["duplicate_count"] / stats["total_candidates"] if stats["total_candidates"] else 0
         ev_reuse_ratio = 1.0 - (len(stats["examples_per_evidence"]) / total_accepted)
         
-        f.write(f"- Unique Source Videos Used: {len(stats['source_videos'])}\\n")
-        f.write(f"- Average Examples / Video: {total_accepted / len(stats['source_videos']):.2f}\\n")
-        f.write(f"- Average Examples / Evidence Signature: {total_accepted / len(stats['examples_per_evidence']):.2f}\\n")
-        f.write(f"- Unique Proposition Signatures: {len(stats['unique_prop_signatures'])}\\n")
-        f.write(f"- Unique Option Sets (Group level): {len(stats['unique_option_sets'])}\\n")
-        f.write(f"- Unique Query Templates Used: {len(stats['query_templates'])}\\n")
-        f.write(f"- Duplicate Catch Ratio: {dup_ratio:.2%}\\n")
-        f.write(f"- Evidence Reuse Ratio: {ev_reuse_ratio:.2%}\\n\\n")
+        f.write(f"- Unique Source Videos Used: {len(stats['source_videos'])}\n")
+        f.write(f"- Average Examples / Video: {total_accepted / len(stats['source_videos']):.2f}\n")
+        f.write(f"- Average Examples / Evidence Signature: {total_accepted / len(stats['examples_per_evidence']):.2f}\n")
+        f.write(f"- Unique Proposition Signatures: {len(stats['unique_prop_signatures'])}\n")
+        f.write(f"- Unique Option Sets (Group level): {len(stats['unique_option_sets'])}\n")
+        f.write(f"- Unique Query Templates Used: {len(stats['query_templates'])}\n")
+        f.write(f"- Duplicate Catch Ratio: {dup_ratio:.2%}\n")
+        f.write(f"- Evidence Reuse Ratio: {ev_reuse_ratio:.2%}\n\n")
         
-        f.write("### General Statistics\\n")
-        f.write(f"- Truth States: {dict(stats['truth_states'])}\\n")
-        f.write(f"- Logical NONE Included: {stats['none_included']} (True={stats['none_true']}, False={stats['none_false']})\\n")
-        f.write(f"- Task Types: {dict(stats['task_types'])}\\n")
-        f.write(f"- Reasoning Families: {dict(stats['reasoning_families'])}\\n")
-        f.write(f"- K Counts: {dict(stats['k_counts'])}\\n")
-        f.write(f"- Temporal Subtypes: {dict(stats['temporal_subtypes'])}\\n")
-        f.write(f"- Temporal Hops: {dict(stats['temporal_hops'])}\\n")
+        f.write("### General Statistics\n")
+        f.write(f"- Truth States: {dict(stats['truth_states'])}\n")
+        f.write(f"- Logical NONE Included: {stats['none_included']} (True={stats['none_true']}, False={stats['none_false']})\n")
+        f.write(f"- Task Types: {dict(stats['task_types'])}\n")
+        f.write(f"- Reasoning Families: {dict(stats['reasoning_families'])}\n")
+        f.write(f"- K Counts: {dict(stats['k_counts'])}\n")
+        f.write(f"- Temporal Subtypes: {dict(stats['temporal_subtypes'])}\n")
+        f.write(f"- Temporal Hops: {dict(stats['temporal_hops'])}\n")
         
     print("ALL REPORTS GENERATED!", flush=True)
 
