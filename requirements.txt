@@ -3,3 +3,4 @@ pyyaml>=6.0
 tqdm>=4.65
 zstandard>=0.22
 ijson>=3.2.3
+gdown>=5.1.0
