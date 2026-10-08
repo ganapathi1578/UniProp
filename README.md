@@ -40,10 +40,10 @@ cd UniProp
 pip install -r requirements.txt
 
 # 3. Source Data (Must be downloaded manually)
-# Place AGQA_balanced/ and AGQA_scene_graphs/ in the root directory.
+bash scripts/download_agqa_scenegraphs.sh
 
 # 4. Generate Dataset
-python main_pipeline.py
+python main_pipeline.py 
 ```
 
 ### Output & Data Policy
